@@ -10,6 +10,7 @@ This changelog adheres to [Keep a CHANGELOG](https://keepachangelog.com).
 ### Added
 - (PA-5786) Add revised `postinstall_required_actions` forcing scriptlets to run in the %post section for rpm
 - (VANAGON-236) Add OSX 14 (Sonoma) x86_64 platform defaults
+- (VANAGON-237) Add OSX 14 (Sonoma) ARM platform defaults
 
 ### Changed
 - (VANAGON-235) Report the actual URL when a Git URL is deemed invalid.
