@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](https://semver.org).
 This changelog adheres to [Keep a CHANGELOG](https://keepachangelog.com).
 
 ## [Unreleased]
+### Added
+- (maint) Add Ubuntu 24.04 noble platform definitions
 
 ## [0.44.0] - 2023-11-30
 ### Added
