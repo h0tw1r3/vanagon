@@ -11,7 +11,7 @@ require 'logger'
 class Vanagon
   class Driver
     include Vanagon::Utilities
-    attr_accessor :platform, :project, :target, :workdir, :remote_workdir, :verbose, :preserve
+    attr_accessor :platform, :project, :target, :cachedir, :workdir, :remote_workdir, :verbose, :preserve
 
     def timeout
       @timeout ||= @project.timeout || ENV["VANAGON_TIMEOUT"] || 7200
@@ -26,6 +26,7 @@ class Vanagon
       @verbose = options[:verbose] || false
       @preserve = options[:preserve] || false
       @workdir = options[:workdir] || Dir.mktmpdir
+      @cachedir = options[:cachedir] || nil
 
       @@configdir = options[:configdir] || File.join(Dir.pwd, "configs")
       components = options[:components] || []
@@ -141,7 +142,7 @@ class Vanagon
       Vanagon::Utilities.retry_with_timeout(retry_count, timeout) do
         install_build_dependencies
       end
-      @project.fetch_sources(workdir, retry_count, timeout)
+      @project.fetch_sources(workdir, retry_count, timeout, cachedir)
 
       @project.make_makefile(workdir)
       @project.make_bill_of_materials(workdir)

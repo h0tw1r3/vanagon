@@ -225,7 +225,7 @@ class Vanagon
     # @param retry_count [Integer] number of times to retry each fetch
     # @param timeout [Integer] How long to wait (in seconds) for each
     #   fetch before aborting
-    def fetch_sources(workdir, retry_count = 1, timeout = 7200)
+    def fetch_sources(workdir, retry_count = 1, timeout = 7200, cachedir = nil)
       @components.each do |component|
         Vanagon::Utilities.retry_with_timeout(retry_count, timeout) do
           component.get_source(workdir)

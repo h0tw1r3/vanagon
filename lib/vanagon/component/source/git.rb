@@ -13,7 +13,7 @@ class Vanagon
   class Component
     class Source
       class Git
-        attr_accessor :url, :log_url, :ref, :workdir, :clone_options
+        attr_accessor :url, :log_url, :ref, :workdir, :cachedir, :clone_options
         attr_reader :version, :default_options, :repo
 
         class << self
@@ -103,6 +103,7 @@ class Vanagon
           @ref = opts[:ref]
           @dirname = opts[:dirname]
           @workdir = File.realpath(workdir)
+          @cachedir = opts[:cachedir]
           @clone_options = opts[:clone_options] ||= {}
 
           # We can test for Repo existence without cloning

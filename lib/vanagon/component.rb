@@ -314,8 +314,9 @@ class Vanagon
     # makefile template
     #
     # @param workdir [String] working directory to put the source into
-    def get_source(workdir) # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity
-      opts = options.merge({ workdir: workdir, dirname: dirname })
+    # @param cachedir [String] cache directory
+    def get_source(workdir, cachedir = nil) # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity
+      opts = options.merge({ workdir: workdir, cachedir: cachedir, dirname: dirname })
       if url || !mirrors.empty?
         if ENV['VANAGON_USE_MIRRORS'] == 'n' or ENV['VANAGON_USE_MIRRORS'] == 'false'
           fetch_url(opts)
@@ -359,10 +360,11 @@ class Vanagon
     # Fetches secondary sources for the component. These are just dumped into the workdir currently.
     #
     # @param workdir [String] working directory to put the source into
-    def get_sources(workdir) # rubocop:disable Metrics/AbcSize
+    # @param cachedir [String] cache directory
+    def get_sources(workdir, cachedir) # rubocop:disable Metrics/AbcSize
       sources.each do |source|
         src = Vanagon::Component::Source.source(
-          source.url, workdir: workdir, ref: source.ref, sum: source.sum
+          source.url, workdir: workdir, cachedir: cachedir, ref: source.ref, sum: source.sum
         )
         src.fetch
         src.verify

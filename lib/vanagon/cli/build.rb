@@ -19,6 +19,7 @@ class Vanagon
           -r, --remote-workdir DIRECTORY   Working directory on the remote host
           -s, --skipcheck                  Skip the "check" stage when building components
           -w, --workdir DIRECTORY          Working directory on the local host
+          -c, --cachedir DIRECTORY         Cache sources
           -v, --verbose                    Only here for backwards compatibility. Does nothing.
 
         Engines:
@@ -61,6 +62,7 @@ class Vanagon
         translations = {
           '--verbose' => :verbose,
           '--workdir' => :workdir,
+          '--cachedir' => :cachedir,
           '--remote-workdir' => :'remote-workdir',
           '--configdir' => :configdir,
           '--engine' => :engine,

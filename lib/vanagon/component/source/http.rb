@@ -11,7 +11,7 @@ class Vanagon
         include Vanagon::Utilities
 
         # Accessors :url, :file, :extension, :workdir, :cleanup are inherited from Local
-        attr_accessor :sum, :sum_type
+        attr_accessor :cachedir, :sum, :sum_type
 
         # Allowed checksum algorithms to use when validating files
         CHECKSUM_TYPES = %w[md5 sha1 sha256 sha512].freeze
@@ -48,7 +48,7 @@ class Vanagon
         # @param workdir [String] working directory to download into
         # @param sum_type [String] type of sum we are verifying
         # @raise [RuntimeError] an exception is raised is sum is nil
-        def initialize(url, sum:, workdir:, sum_type:, **options)
+        def initialize(url, sum:, workdir:, cachedir:, sum_type:, **options)
           unless sum
             fail "sum is required to validate the http source"
           end
@@ -62,6 +62,7 @@ class Vanagon
           @url = url
           @sum = sum
           @workdir = workdir
+          @cachedir = cachedir
           @sum_type = sum_type
 
           if Vanagon::Component::Source::Http.valid_url?(@sum)
